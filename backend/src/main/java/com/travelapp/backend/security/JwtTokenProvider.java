@@ -57,7 +57,6 @@ public class JwtTokenProvider {
             Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token);
             return true;
         } catch (Exception ex) {
-            // You can log different exceptions here (e.g., SignatureException, ExpiredJwtException)
         }
         return false;
     }

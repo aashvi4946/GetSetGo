@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,4 +70,24 @@ public class TourServiceImpl implements TourService {
         }
         tourRepository.deleteById(tourId);
     }
+
+    @Override
+    @Cacheable("top-tours") // Cache the result of this expensive query
+    public List<TourDto> getTop5Tours() {
+    return tourRepository.findTop5ToursByBookings().stream().map(tour -> {
+        TourDto tourDto = new TourDto();
+        BeanUtils.copyProperties(tour, tourDto);
+        return tourDto;
+    }).collect(Collectors.toList());
+}
+
+    @Override
+    public List<TourDto> searchTours(String destination, LocalDate startDate) {
+    return tourRepository.findByDestinationContainingIgnoreCaseAndStartDateAfter(destination, startDate)
+            .stream().map(tour -> {
+                TourDto tourDto = new TourDto();
+                BeanUtils.copyProperties(tour, tourDto);
+                return tourDto;
+            }).collect(Collectors.toList());
+}
 }

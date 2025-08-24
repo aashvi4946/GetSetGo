@@ -23,7 +23,7 @@ CREATE TABLE user_roles (
 
 CREATE TABLE tours (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     description VARCHAR(1000),
     destination VARCHAR(255),
     start_date DATE,
