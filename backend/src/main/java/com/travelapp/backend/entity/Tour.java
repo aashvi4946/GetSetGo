@@ -30,4 +30,17 @@ public class Tour {
     private BigDecimal price;
 
     private int maxCapacity;
+
+    public Tour(Long id, String name, String description, String destination, LocalDate startDate, LocalDate endDate, BigDecimal price, int maxCapacity) {
+       this.id = id;
+       this.name = name;
+       this.description = description;
+       this.destination = destination;
+       this.startDate = startDate;
+       this.endDate = endDate;
+       this.price = price;
+       this.maxCapacity = maxCapacity;
+}
+    public Tour() {}
+
 }

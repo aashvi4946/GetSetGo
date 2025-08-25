@@ -4,6 +4,7 @@ import com.travelapp.backend.entity.Tour;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,6 @@ public interface TourRepository extends JpaRepository<Tour, Long> {
         @Param("destination") String destination,
         @Param("startDate") LocalDate startDate
     );
+
+    Optional<Tour> findByName(String name);
 }
